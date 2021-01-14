@@ -1,0 +1,14 @@
+{
+  "name": "akitainu",
+  "version": "1.0.0",
+  "description": "Gradual code linting tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "akitainu"
+  ],
+  "author": "uhyo <uhyo@uhy.ooo>",
+  "license": "MIT"
+}
