@@ -1,7 +1,7 @@
 import { Checker } from "../checker";
-import { Filter } from "../filter";
+import { Source } from "../source";
 
 export type Rule = {
-  filter: Filter;
+  source: Source;
   check: Checker;
 };

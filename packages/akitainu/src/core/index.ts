@@ -6,7 +6,7 @@ export type RunRuleResult = {
 };
 
 export async function runRule(rule: Rule): Promise<RunRuleResult> {
-  const filterResult = await rule.filter.run();
+  const filterResult = await rule.source.run();
   const result = await rule.check.run({
     targetFiles: filterResult.targetFiles,
   });

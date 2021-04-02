@@ -22,8 +22,8 @@ describe("runRule", () => {
           };
         },
       },
-      filter: {
-        name: "filter",
+      source: {
+        name: "source",
         async run() {
           return { targetFiles: ["a.ts", "b.ts"] };
         },
