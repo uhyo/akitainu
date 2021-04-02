@@ -1,4 +1,4 @@
-import { CheckError } from "../check";
+import { CheckError } from "../checker";
 import { Rule } from "../rule";
 
 export type RunRuleResult = {

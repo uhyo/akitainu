@@ -1,13 +1,13 @@
-export type Check = {
+export type Checker = {
   name: string;
-  run: (input: CheckInput) => Promise<CheckResult>;
+  run: (input: CheckerInput) => Promise<CheckerResult>;
 };
 
-export type CheckInput = {
+export type CheckerInput = {
   readonly targetFiles: readonly string[];
 };
 
-export type CheckResult = {
+export type CheckerResult = {
   errors: CheckError[];
 };
 
