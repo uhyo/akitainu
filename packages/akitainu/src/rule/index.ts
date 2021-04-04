@@ -2,6 +2,7 @@ import { Checker } from "../checker";
 import { Source } from "../source";
 
 export type Rule = {
+  name?: string;
   source: Source;
-  check: Checker;
+  checker: Checker;
 };

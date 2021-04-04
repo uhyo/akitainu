@@ -4,7 +4,7 @@ import { Rule } from "../rule";
 describe("runRule", () => {
   it("errors", async () => {
     const rule: Rule = {
-      check: {
+      checker: {
         name: "check",
         async run(input) {
           expect(input.targetFiles).toEqual(["a.ts", "b.ts"]);
