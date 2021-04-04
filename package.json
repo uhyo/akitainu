@@ -12,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^4.3.0-beta"
-  }
+  },
+  "workspaces": [
+    "./packages/*"
+  ]
 }
