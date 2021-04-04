@@ -4,7 +4,11 @@ export type Checker = {
 };
 
 export type CheckerInput = {
-  readonly targetFiles: readonly string[];
+  /**
+   * Files to run the check against.
+   * If omitted, checker's default should be applied.
+   */
+  readonly targetFiles?: readonly string[];
 };
 
 export type CheckerResult = {

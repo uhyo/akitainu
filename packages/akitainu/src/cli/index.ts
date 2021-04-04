@@ -7,7 +7,8 @@ import { runRule } from "../core";
 import { Rule } from "../rule";
 import { Source } from "../source";
 import { nullSource } from "../source/nullSource";
-import { CliConfig, getDefaultConfig, PackageConfig } from "./config";
+import { CliConfig, getDefaultConfig } from "./config";
+import { resolvePackage } from "./resolvePackage";
 
 main().catch((err) => {
   console.error(err);
@@ -39,14 +40,4 @@ function getRules(config: CliConfig): Promise<Rule[]> {
       checker: (await resolvePackage(rule.checker)) as Checker,
     }))
   );
-}
-
-async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
-  if (typeof pkg === "string") {
-    const mod = await import(pkg);
-    return mod.default({});
-  }
-  const [packageName, config] = pkg;
-  const mod = await import(packageName);
-  return mod.default(config);
 }

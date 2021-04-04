@@ -3,6 +3,6 @@ import { Source } from "../source";
 
 export type Rule = {
   name?: string;
-  source: Source;
+  source?: Source;
   checker: Checker;
 };

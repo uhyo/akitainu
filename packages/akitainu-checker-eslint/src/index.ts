@@ -1,11 +1,10 @@
-import path from "path";
-import { ESLint } from "eslint";
 import { Checker, CheckError } from "akitainu";
+import { ESLint } from "eslint";
 
 export default function eslintChecker(eslintOptions?: ESLint.Options): Checker {
   const checker: Checker = {
     name: "eslint",
-    async run({ targetFiles }) {
+    async run({ targetFiles = [] }) {
       const eslint = new ESLint(eslintOptions);
       const eslintResult = await eslint.lintFiles(targetFiles as string[]);
       const errors: CheckError[] = eslintResult.flatMap((lintResult) =>

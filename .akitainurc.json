@@ -1,0 +1,15 @@
+{
+  "rules": [
+    {
+      "source": [
+        "akitainu:static",
+        {
+          "files": [
+            "./packages/akitainu/src/**/*.ts"
+          ]
+        }
+      ],
+      "checker": "akitainu-checker-eslint"
+    }
+  ]
+}
