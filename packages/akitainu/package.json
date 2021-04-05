@@ -26,6 +26,7 @@
     "typescript": "^4.3.0-beta"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "cosmiconfig": "^7.0.0"
   }
 }

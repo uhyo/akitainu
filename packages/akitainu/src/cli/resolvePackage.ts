@@ -1,3 +1,4 @@
+import { prettyConsoleReporter } from "../reporter/prettyConsoleReporter";
 import { staticSource } from "../source/staticSource";
 import { PackageConfig } from "./config";
 
@@ -11,8 +12,9 @@ export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
   return mod(config);
 }
 
-const internalPackage: Map<string, (config: any) => unknown> = new Map([
+const internalPackage = new Map<string, (config: any) => unknown>([
   ["static", staticSource],
+  ["pretty-console", prettyConsoleReporter],
 ]);
 
 async function resolvePackageName(

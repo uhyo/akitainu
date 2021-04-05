@@ -3,7 +3,8 @@
 import { cosmiconfig } from "cosmiconfig";
 import path from "path";
 import { Checker } from "../checker";
-import { runRule } from "../core";
+import { runReporters, runRules } from "../core";
+import { Reporter } from "../reporter";
 import { Rule } from "../rule";
 import { Source } from "../source";
 import { nullSource } from "../source/nullSource";
@@ -24,10 +25,17 @@ async function main() {
     ),
     ...(searchResult?.config ?? {}),
   };
-  const rules = await getRules(config);
+  const [rules, reporters] = await Promise.all([
+    getRules(config),
+    getReporters(config),
+  ]);
 
-  const results = await Promise.all(rules.map((rule) => runRule(rule)));
-  console.log(results);
+  const result = await runRules(rules);
+
+  await runReporters({
+    reporters,
+    errors: result.errors,
+  });
 }
 
 function getRules(config: CliConfig): Promise<Rule[]> {
@@ -39,5 +47,11 @@ function getRules(config: CliConfig): Promise<Rule[]> {
         : nullSource(),
       checker: (await resolvePackage(rule.checker)) as Checker,
     }))
+  );
+}
+
+function getReporters(config: CliConfig): Promise<Reporter[]> {
+  return Promise.all(
+    config.reporters.map((rep) => resolvePackage(rep) as Promise<Reporter>)
   );
 }

@@ -7,6 +7,10 @@ export type CliConfig = {
    * Rule to run.
    */
   rules: ConfigRule[];
+  /**
+   * Reporters definition.
+   */
+  reporters: PackageConfig[];
 };
 
 export type ConfigRule = {
@@ -30,5 +34,6 @@ export function getDefaultConfig(defaultBaseDirectory: string): CliConfig {
   return {
     baseDirectory: defaultBaseDirectory,
     rules: [],
+    reporters: ["akitainu:pretty-console"],
   };
 }
