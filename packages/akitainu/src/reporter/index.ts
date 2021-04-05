@@ -1,7 +1,7 @@
-import { CheckError } from "../checker";
+import { RuleError } from "../core";
 
 export type ReporterInput = {
-  errors: readonly CheckError[];
+  errors: readonly RuleError[];
 };
 
 export type Reporter = {

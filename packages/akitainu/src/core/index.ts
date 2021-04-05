@@ -2,8 +2,15 @@ import { CheckError } from "../checker";
 import { Reporter } from "../reporter";
 import { Rule } from "../rule";
 
+export type RuleError = CheckError & {
+  /**
+   * Name of checker that produced this error.
+   */
+  checker: string;
+};
+
 export type RunRuleResult = {
-  errors: CheckError[];
+  errors: RuleError[];
 };
 
 export async function runRule(rule: Rule): Promise<RunRuleResult> {
@@ -12,12 +19,15 @@ export async function runRule(rule: Rule): Promise<RunRuleResult> {
     targetFiles: filterResult?.targetFiles,
   });
   return {
-    errors: result.errors,
+    errors: result.errors.map((err) => ({
+      ...err,
+      checker: rule.checker.name,
+    })),
   };
 }
 
 export type RunRulesResult = {
-  errors: CheckError[];
+  errors: RuleError[];
 };
 
 export async function runRules(
@@ -31,7 +41,7 @@ export async function runRules(
 
 export type RunReportersInput = {
   reporters: readonly Reporter[];
-  errors: readonly CheckError[];
+  errors: readonly RuleError[];
 };
 
 export async function runReporters({
