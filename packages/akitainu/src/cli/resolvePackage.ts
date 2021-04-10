@@ -14,8 +14,8 @@ export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
 }
 
 const internalPackage = new Map<string, (config: any) => unknown>([
-  ["static", staticSource],
-  ["pretty-console", prettyConsoleReporter],
+  ["static-source", staticSource],
+  ["pretty-console-reporter", prettyConsoleReporter],
   ["by-code-filter", byCodeFilter],
 ]);
 

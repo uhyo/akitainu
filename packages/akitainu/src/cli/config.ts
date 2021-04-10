@@ -38,6 +38,6 @@ export function getDefaultConfig(defaultBaseDirectory: string): CliConfig {
   return {
     baseDirectory: defaultBaseDirectory,
     rules: [],
-    reporters: ["akitainu:pretty-console"],
+    reporters: ["akitainu:pretty-console-reporter"],
   };
 }

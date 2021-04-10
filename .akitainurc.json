@@ -2,7 +2,7 @@
   "rules": [
     {
       "source": [
-        "akitainu:static",
+        "akitainu:static-source",
         {
           "files": [
             "./packages/akitainu/src/**/*.ts"
