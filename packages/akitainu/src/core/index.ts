@@ -14,15 +14,21 @@ export type RunRuleResult = {
 };
 
 export async function runRule(rule: Rule): Promise<RunRuleResult> {
-  const filterResult = await rule.source?.run();
+  const sourceResult = await rule.source?.run();
   const result = await rule.checker.run({
-    targetFiles: filterResult?.targetFiles,
+    targetFiles: sourceResult?.targetFiles,
   });
+  const ruleErrors = result.errors.map((err) => ({
+    ...err,
+    checker: rule.checker.name,
+  }));
+
+  const filterResult = (await rule.filter?.run({
+    errors: ruleErrors,
+  })) ?? { errors: ruleErrors };
+
   return {
-    errors: result.errors.map((err) => ({
-      ...err,
-      checker: rule.checker.name,
-    })),
+    errors: filterResult.errors,
   };
 }
 
