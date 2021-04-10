@@ -1,6 +1,6 @@
 {
   "name": "akitainu",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "Gradual code linting tool",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,6 +13,11 @@
   },
   "keywords": [
     "akitainu"
+  ],
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "src"
   ],
   "author": "uhyo <uhyo@uhy.ooo>",
   "license": "MIT",

@@ -1,5 +1,6 @@
 import { byCodeFilter } from "../filter/byCodeFilter";
 import { prettyConsoleReporter } from "../reporter/prettyConsoleReporter";
+import { gitDiffSource } from "../source/gitDiffSource";
 import { staticSource } from "../source/staticSource";
 import { PackageConfig } from "./config";
 
@@ -15,6 +16,7 @@ export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
 
 const internalPackage = new Map<string, (config: any) => unknown>([
   ["static-source", staticSource],
+  ["git-diff-source", gitDiffSource],
   ["pretty-console-reporter", prettyConsoleReporter],
   ["by-code-filter", byCodeFilter],
 ]);

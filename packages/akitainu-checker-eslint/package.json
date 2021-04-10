@@ -1,6 +1,6 @@
 {
   "name": "akitainu-checker-eslint",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "ESLint checker for Akitainu",
   "main": "dist/index.js",
   "scripts": {
@@ -11,6 +11,11 @@
   },
   "keywords": [
     "akitainu"
+  ],
+  "files": [
+    "dist",
+    "!dist/.tsbuildinfo",
+    "src"
   ],
   "author": "uhyo <uhyo@uhy.ooo>",
   "license": "MIT",
