@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import { Reporter } from ".";
 
-export type PrettyConsoleReporterConfig = {};
+// empty for now
+export type PrettyConsoleReporterConfig = Record<string, never>;
 
 export function prettyConsoleReporter(
   _: PrettyConsoleReporterConfig

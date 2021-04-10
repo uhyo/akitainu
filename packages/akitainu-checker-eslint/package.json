@@ -15,8 +15,8 @@
   "author": "uhyo <uhyo@uhy.ooo>",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^7.23.0",
-    "@types/eslint": "^7.2.8"
+    "@types/eslint": "^7.2.8",
+    "eslint": "^7.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
