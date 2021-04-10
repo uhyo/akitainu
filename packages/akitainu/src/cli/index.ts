@@ -38,6 +38,11 @@ async function main() {
     reporters,
     errors: result.errors,
   });
+
+  if (result.errors.length > 0) {
+    // If there was an error, exit with non-zero exit code
+    process.exit(64);
+  }
 }
 
 function getRules(config: CliConfig): Promise<Rule[]> {
