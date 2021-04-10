@@ -4,6 +4,8 @@ import { cosmiconfig } from "cosmiconfig";
 import path from "path";
 import { Checker } from "../checker";
 import { runReporters, runRules } from "../core";
+import { Filter } from "../filter";
+import { noFilter } from "../filter/noFilter";
 import { Reporter } from "../reporter";
 import { Rule } from "../rule";
 import { Source } from "../source";
@@ -46,6 +48,9 @@ function getRules(config: CliConfig): Promise<Rule[]> {
         ? ((await resolvePackage(rule.source)) as Source)
         : nullSource(),
       checker: (await resolvePackage(rule.checker)) as Checker,
+      filter: rule.filter
+        ? ((await resolvePackage(rule.filter)) as Filter)
+        : noFilter(),
     }))
   );
 }

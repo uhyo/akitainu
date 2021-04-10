@@ -26,6 +26,10 @@ export type ConfigRule = {
    * Checker applied.
    */
   checker: PackageConfig;
+  /**
+   * Filter applied to errors.
+   */
+  filter?: PackageConfig;
 };
 
 export type PackageConfig = string | [packageName: string, config: unknown];
