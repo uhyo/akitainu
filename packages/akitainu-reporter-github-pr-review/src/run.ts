@@ -58,8 +58,8 @@ export async function run(
     metadataTag
   );
 
-  console.log(diff);
-  console.log(errorsByFile);
+  // console.log(diff);
+  // console.log(errorsByFile);
 
   const parsedDiff = parseDiff(diff);
   const diffErrors = mapErrorsToDiff(errorsByFile, parsedDiff);
