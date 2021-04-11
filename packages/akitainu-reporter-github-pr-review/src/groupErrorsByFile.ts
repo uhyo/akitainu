@@ -22,7 +22,6 @@ export function groupErrorsByFile(
       noLocationErrors.push(error);
       continue;
     }
-    console.log(baseDir, error.location.file);
     const relativeFilePath = path.relative(baseDir, error.location.file);
     upsert(errorsByFile, relativeFilePath, emptyArr).push(
       // checked for existence of error.location above

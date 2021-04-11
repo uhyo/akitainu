@@ -37,10 +37,7 @@ export async function run(
     },
   });
 
-  const { noLocationErrors, errorsByFile } = groupErrorsByFile(
-    errors,
-    gitToplevelDir.trim()
-  );
+  const { errorsByFile } = groupErrorsByFile(errors, gitToplevelDir.trim());
   // sort errors by position
   for (const errors of errorsByFile.values()) {
     errors.sort(
@@ -49,8 +46,6 @@ export async function run(
         a.location.column - b.location.column
     );
   }
-  console.log(noLocationErrors);
-  console.log(errorsByFile);
 
   // we specified `format: "diff"` so data is a string diff
   const diff = ((await prDiff).data as unknown) as string;
@@ -62,18 +57,13 @@ export async function run(
     metadataTag
   );
 
-  console.log(diff);
   const parsedDiff = parseDiff(diff);
-  console.log(parsedDiff[0]);
   const diffErrors = mapErrorsToDiff(errorsByFile, parsedDiff);
 
   const existingReviews = await existingReviewsP;
 
   const newReviewComments = filterReviewComments(diffErrors, existingReviews);
 
-  console.log(diffErrors);
-  console.log(existingReviews);
-  console.log(newReviewComments);
   if (newReviewComments.length === 0) {
     // no new comments
     return;

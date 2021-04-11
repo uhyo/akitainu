@@ -31,7 +31,6 @@ export function mapErrorsToDiff(
     let positionStart = 1;
     for (const chunk of diff.chunks) {
       const { changes } = chunk;
-      console.log(chunk);
 
       for (const [changeIndex, change] of changes.entries()) {
         if (change.type === "del") {
