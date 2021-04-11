@@ -7,6 +7,7 @@ import { filterReviewComments } from "./filterReviewComments";
 import { generateReviewComments } from "./generateReviewComments";
 import { getExistingReviews } from "./getExistingReviews";
 import { groupErrorsByFile } from "./groupErrorsByFile";
+import { makeSummaryComment } from "./makeSummaryComment";
 import { mapErrorsToDiff } from "./mapErrorsToDiff";
 
 export type Repo = {
@@ -57,6 +58,9 @@ export async function run(
     metadataTag
   );
 
+  console.log(diff);
+  console.log(errorsByFile);
+
   const parsedDiff = parseDiff(diff);
   const diffErrors = mapErrorsToDiff(errorsByFile, parsedDiff);
 
@@ -71,11 +75,12 @@ export async function run(
 
   const comments = generateReviewComments(newReviewComments, metadataTag);
 
-  const body = `🐕 Found **${errors.length}** error${
-    errors.length > 1 ? "s" : ""
-  }.
-
-<!-- ${metadataTag}: {} -->`;
+  const body = makeSummaryComment(
+    errors,
+    diffErrors,
+    newReviewComments,
+    metadataTag
+  );
 
   await octokit.rest.pulls.createReview({
     ...repo,
