@@ -11,5 +11,15 @@
       ],
       "checker": "akitainu-checker-eslint"
     }
+  ],
+  "reporters": [
+    [
+      "akitainu-reporter-github-pr-review",
+      {
+        "githubToken": "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",
+        "repository": "uhyo/akitainu-playground",
+        "prNumber": 1
+      }
+    ]
   ]
 }

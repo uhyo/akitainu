@@ -1,5 +1,13 @@
-export { Checker, CheckError, CheckerInput, CheckerResult } from "./checker";
-export { Source, SourceResult } from "./source";
+export type {
+  Checker,
+  CheckerInput,
+  CheckerResult,
+  CheckError,
+} from "./checker";
+export type { RuleError } from "./core";
+export type { Filter, FilterInput, FilterResult } from "./filter";
+export type { Reporter, ReporterInput } from "./reporter";
+export type { Source, SourceResult } from "./source";
 
 /**
  * Run Akitainu.
