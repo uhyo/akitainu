@@ -10,6 +10,8 @@ You only check changed files with the new lint rule when a pull request is opene
 
 **akitainu** helps you automate this workflow.
 
+akitainu is inspired by [reviewdog](https://github.com/reviewdog/reviewdog), but is for the npm ecosystem.
+
 ## Usage
 
 Basically, you define **rules** which are composed of following configurations:
