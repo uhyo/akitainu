@@ -2,6 +2,10 @@ import { CheckError } from "../checker";
 import { Reporter } from "../reporter";
 import { Rule } from "../rule";
 
+export type RunRuleOptionns = {
+  baseDirectory: string;
+};
+
 export type RuleError = CheckError & {
   /**
    * Name of checker that produced this error.
@@ -13,10 +17,14 @@ export type RunRuleResult = {
   errors: RuleError[];
 };
 
-export async function runRule(rule: Rule): Promise<RunRuleResult> {
+export async function runRule(
+  rule: Rule,
+  { baseDirectory }: RunRuleOptionns
+): Promise<RunRuleResult> {
   const sourceResult = await rule.source?.run();
   const result = await rule.checker.run({
     targetFiles: sourceResult?.targetFiles,
+    baseDirectory,
   });
   const ruleErrors = result.errors.map((err) => ({
     ...err,
@@ -37,9 +45,12 @@ export type RunRulesResult = {
 };
 
 export async function runRules(
-  rules: readonly Rule[]
+  rules: readonly Rule[],
+  options: RunRuleOptionns
 ): Promise<RunRulesResult> {
-  const results = await Promise.all(rules.map(runRule));
+  const results = await Promise.all(
+    rules.map((rule) => runRule(rule, options))
+  );
   return {
     errors: results.flatMap((result) => result.errors),
   };

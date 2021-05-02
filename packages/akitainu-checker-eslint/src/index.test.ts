@@ -7,6 +7,7 @@ describe("akitainu-checker-eslint", () => {
     const testFixturesDir = path.resolve(__dirname, "../test-fixtures");
     const { errors } = await checker.run({
       targetFiles: ["./test-fixtures/*.js"],
+      baseDirectory: "./",
     });
     expect(errors).toEqual([
       {

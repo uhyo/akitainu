@@ -9,6 +9,10 @@ export type CheckerInput = {
    * If omitted, checker's default should be applied.
    */
   readonly targetFiles?: readonly string[];
+  /**
+   * Base directory. This should be base of relative paths.
+   */
+  readonly baseDirectory: string;
 };
 
 export type CheckerResult = {

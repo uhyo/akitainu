@@ -32,7 +32,9 @@ async function main() {
     getReporters(config),
   ]);
 
-  const result = await runRules(rules);
+  const result = await runRules(rules, {
+    baseDirectory: config.baseDirectory,
+  });
 
   await runReporters({
     reporters,
