@@ -29,7 +29,9 @@ describe("runRule", () => {
         },
       },
     };
-    const result = await runRule(rule);
+    const result = await runRule(rule, {
+      baseDirectory: "./",
+    });
     expect(result.errors).toEqual([
       {
         checker: "check",
@@ -78,7 +80,9 @@ describe("runRule", () => {
         },
       },
     };
-    const result = await runRule(rule);
+    const result = await runRule(rule, {
+      baseDirectory: "./",
+    });
     expect(result.errors).toEqual([
       {
         checker: "check",
