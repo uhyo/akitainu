@@ -1,6 +1,6 @@
 {
   "name": "akitainu",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "description": "Gradual code linting tool",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

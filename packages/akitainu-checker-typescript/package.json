@@ -30,6 +30,7 @@
     "typescript": "^4.3.0-beta"
   },
   "peerDependencies": {
+    "akitainu": "^0.1.0-alpha.4",
     "typescript": "^4.3.0-beta"
   },
   "dependencies": {
