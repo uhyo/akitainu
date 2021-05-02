@@ -40,4 +40,46 @@ describe("akitainu-checker-typescript", () => {
       },
     ]);
   });
+  it("filtering by filenames", async () => {
+    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
+    const checker = typescriptChecker({
+      tsconfig: path.join(projectDir, "tsconfig.json"),
+    });
+    const { errors } = await checker.run({
+      targetFiles: ["src/**/foo.ts"],
+      baseDirectory: projectDir,
+    });
+    expect(errors).toEqual([
+      {
+        code: "TS2322",
+        location: {
+          file: "src/foo.ts",
+          line: 1,
+          column: 14,
+        },
+        message: "Type 'number' is not assignable to type 'string'.",
+      },
+    ]);
+  });
+  it("filtering by filenames (multiple)", async () => {
+    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
+    const checker = typescriptChecker({
+      tsconfig: path.join(projectDir, "tsconfig.json"),
+    });
+    const { errors } = await checker.run({
+      targetFiles: ["src/**/foo.ts", "src/**/bar.ts"],
+      baseDirectory: projectDir,
+    });
+    expect(errors).toEqual([
+      {
+        code: "TS2322",
+        location: {
+          file: "src/foo.ts",
+          line: 1,
+          column: 14,
+        },
+        message: "Type 'number' is not assignable to type 'string'.",
+      },
+    ]);
+  });
 });

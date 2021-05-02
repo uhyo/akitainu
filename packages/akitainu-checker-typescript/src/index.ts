@@ -1,8 +1,7 @@
 import { Checker, CheckError } from "akitainu";
-import glob from "glob";
+import { Minimatch } from "minimatch";
 import path from "path";
 import ts from "typescript";
-import { promisify } from "util";
 
 type TypeScriptCheckerOptions = {
   tsconfig?: string;
@@ -18,7 +17,7 @@ export default function typescriptChecker({
 }: TypeScriptCheckerOptions): Checker {
   const checker: Checker = {
     name: "typescript",
-    async run({ targetFiles = [], baseDirectory }) {
+    async run({ targetFiles, baseDirectory }) {
       let parsedCommandLine: ts.ParsedCommandLine | undefined;
       if (tsconfig !== undefined) {
         parsedCommandLine = ts.getParsedCommandLineOfConfigFile(
@@ -44,12 +43,8 @@ export default function typescriptChecker({
           };
         }
       }
-      const hasMagic = targetFiles.some((value) => glob.hasMagic(value));
-      const files = hasMagic
-        ? await promisify(glob)(`@(${targetFiles.join("|")})`)
-        : targetFiles;
       const program = ts.createProgram({
-        rootNames: parsedCommandLine?.fileNames ?? targetFiles,
+        rootNames: parsedCommandLine?.fileNames ?? targetFiles ?? [],
         options: { ...compilerOptions, noEmit: true },
       });
       const emitResult = program.emit(undefined, () => {
@@ -58,28 +53,43 @@ export default function typescriptChecker({
       const allDiagnostics = ts
         .getPreEmitDiagnostics(program)
         .concat(emitResult.diagnostics);
-      const errors: CheckError[] = allDiagnostics.map((d) => {
-        const { file, start } = d;
+
+      const fileFilter =
+        targetFiles &&
+        targetFiles.length > 0 &&
+        new Minimatch(
+          targetFiles.length > 1
+            ? `{${targetFiles.join(",")}}`
+            : (targetFiles[0] as string)
+        );
+      const errors: CheckError[] = allDiagnostics.flatMap((d) => {
+        const { file, start = 0 } = d;
         const code = `TS${d.code}`;
         const message = ts.flattenDiagnosticMessageText(d.messageText, "\n", 2);
         if (!file) {
-          return {
+          return [
+            {
+              code,
+              message,
+            },
+          ];
+        }
+        const fileName = path.relative(baseDirectory, file.fileName);
+        if (fileFilter && !fileFilter.match(fileName)) {
+          return [];
+        }
+        const { line, character } = file.getLineAndCharacterOfPosition(start);
+        return [
+          {
             code,
             message,
-          };
-        }
-        const { line, character } = file.getLineAndCharacterOfPosition(
-          d.start || 0
-        );
-        return {
-          code,
-          message,
-          location: {
-            file: path.relative(baseDirectory, file.fileName),
-            line: line + 1, // transform 0-indexed to 1-indexed
-            column: character + 1, // same as above
+            location: {
+              file: path.relative(baseDirectory, file.fileName),
+              line: line + 1, // transform 0-indexed to 1-indexed
+              column: character + 1, // same as above
+            },
           },
-        };
+        ];
       });
       return { errors };
     },
