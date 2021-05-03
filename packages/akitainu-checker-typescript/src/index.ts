@@ -1,7 +1,8 @@
 import { Checker, CheckError } from "akitainu";
-import { Minimatch } from "minimatch";
+import { glob } from "glob";
 import path from "path";
 import ts from "typescript";
+import { promisify } from "util";
 
 type TypeScriptCheckerOptions = {
   tsconfig?: string;
@@ -43,6 +44,22 @@ export default function typescriptChecker({
           };
         }
       }
+
+      // innvoke search of targetFiles
+      // TODO: delaying await may not be really meaning here, without spilling out type checkign to another thread
+      const targetFilesResultP =
+        targetFiles &&
+        targetFiles.length > 0 &&
+        promisify(glob)(
+          targetFiles.length > 1
+            ? `{${targetFiles.join(",")}}`
+            : (targetFiles[0] as string),
+          {
+            cwd: baseDirectory,
+            absolute: true,
+          }
+        );
+
       const program = ts.createProgram({
         rootNames: parsedCommandLine?.fileNames ?? targetFiles ?? [],
         options: { ...compilerOptions, noEmit: true },
@@ -54,14 +71,9 @@ export default function typescriptChecker({
         .getPreEmitDiagnostics(program)
         .concat(emitResult.diagnostics);
 
-      const fileFilter =
-        targetFiles &&
-        targetFiles.length > 0 &&
-        new Minimatch(
-          targetFiles.length > 1
-            ? `{${targetFiles.join(",")}}`
-            : (targetFiles[0] as string)
-        );
+      const targetFilesResult = await targetFilesResultP;
+      const fileFilter = targetFilesResult && new Set(targetFilesResult);
+
       const errors: CheckError[] = allDiagnostics.flatMap((d) => {
         const { file, start = 0 } = d;
         const code = `TS${d.code}`;
@@ -74,8 +86,7 @@ export default function typescriptChecker({
             },
           ];
         }
-        const fileName = path.relative(baseDirectory, file.fileName);
-        if (fileFilter && !fileFilter.match(fileName)) {
+        if (fileFilter && !fileFilter.has(file.fileName)) {
           return [];
         }
         const { line, character } = file.getLineAndCharacterOfPosition(start);
