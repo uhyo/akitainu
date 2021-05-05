@@ -20,3 +20,4 @@ jobs:
           node-version: 15.x
       - run: npm run bootstrap
       - run: npm run lint
+      - run: npm test --workspaces
