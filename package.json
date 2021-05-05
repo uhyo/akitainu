@@ -6,6 +6,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "bootstrap": "npm ci --no-bin-links && npm rebuild typescript && npm run build --workspaces && npm rebuild",
     "watch:build": "concurrently \"npm run watch:build --workspace akitainu\" \"npm run watch:build --workspace akitainu-reporter-github-pr-review\"",
     "lint": "akitainu",
     "test": "jest"

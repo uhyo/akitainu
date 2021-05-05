@@ -26,8 +26,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 15
-      - run: npm ci
-        working-directory: ./packages/${{ matrix.package }}
+      - run: npm run bootstrap
       - run: npm run build
         working-directory: ./packages/${{ matrix.package }}
       - run: npm test

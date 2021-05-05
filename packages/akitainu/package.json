@@ -10,7 +10,8 @@
     "build": "tsc --build",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "watch:build": "tsc --build --watch",
-    "watch:test": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+    "watch:test": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "install": "node -e 'require(\"fs\").existsSync(\"./dist\") || process.exit(1)' || npm run build"
   },
   "keywords": [
     "akitainu"
