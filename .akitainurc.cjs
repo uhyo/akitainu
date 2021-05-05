@@ -10,7 +10,7 @@ module.exports = {
     // eslint
     ...packages.map((p) => ({
       source: [
-        "akitainu:static-source",
+        "akitainu:source-static",
         {
           files: [`packages/${p}/src/**/*.ts`],
         },

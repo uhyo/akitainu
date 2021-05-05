@@ -15,10 +15,10 @@ export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
 }
 
 const internalPackage = new Map<string, (config: never) => unknown>([
-  ["static-source", staticSource],
-  ["git-diff-source", gitDiffSource],
-  ["pretty-console-reporter", prettyConsoleReporter],
-  ["by-code-filter", byCodeFilter],
+  ["source-static", staticSource],
+  ["source-git-diff", gitDiffSource],
+  ["reporter-pretty-console", prettyConsoleReporter],
+  ["filter-by-code", byCodeFilter],
 ]);
 
 async function resolvePackageName(
