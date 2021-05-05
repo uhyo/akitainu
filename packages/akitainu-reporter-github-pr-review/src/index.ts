@@ -1,6 +1,6 @@
 import { Reporter } from "akitainu";
 import { Octokit } from "octokit";
-import { run } from "./run";
+import { run } from "./run.js";
 
 type OctokitOptions = ConstructorParameters<typeof Octokit>[0];
 

@@ -1,5 +1,5 @@
-import { getReviewPositionString } from "./getExistingReviews";
-import { ErrorsForDiff } from "./mapErrorsToDiff";
+import { getReviewPositionString } from "./getExistingReviews.js";
+import { ErrorsForDiff } from "./mapErrorsToDiff.js";
 
 export function filterReviewComments(
   errors: readonly ErrorsForDiff[],

@@ -1,14 +1,14 @@
-import { RuleError } from "akitainu/src/core";
+import { RuleError } from "akitainu";
 import { exec } from "child_process";
 import { Octokit } from "octokit";
 import parseDiff from "parse-diff";
 import { promisify } from "util";
-import { filterReviewComments } from "./filterReviewComments";
-import { generateReviewComments } from "./generateReviewComments";
-import { getExistingReviews } from "./getExistingReviews";
-import { groupErrorsByFile } from "./groupErrorsByFile";
-import { makeSummaryComment } from "./makeSummaryComment";
-import { mapErrorsToDiff } from "./mapErrorsToDiff";
+import { filterReviewComments } from "./filterReviewComments.js";
+import { generateReviewComments } from "./generateReviewComments.js";
+import { getExistingReviews } from "./getExistingReviews.js";
+import { groupErrorsByFile } from "./groupErrorsByFile.js";
+import { makeSummaryComment } from "./makeSummaryComment.js";
+import { mapErrorsToDiff } from "./mapErrorsToDiff.js";
 
 export type Repo = {
   owner: string;

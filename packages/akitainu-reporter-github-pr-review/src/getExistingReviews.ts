@@ -1,6 +1,6 @@
 import { Octokit } from "octokit";
-import { isReviewCommentMetadata } from "./reviewCommentMetadata";
-import { Repo } from "./run";
+import { isReviewCommentMetadata } from "./reviewCommentMetadata.js";
+import { Repo } from "./run.js";
 
 export function getReviewPositionString(
   path: string,

@@ -1,5 +1,5 @@
-import { ErrorsForDiff } from "./mapErrorsToDiff";
-import { ReviewCommentMetadata } from "./reviewCommentMetadata";
+import { ErrorsForDiff } from "./mapErrorsToDiff.js";
+import { ReviewCommentMetadata } from "./reviewCommentMetadata.js";
 
 /**
  * 'comments' item for github API

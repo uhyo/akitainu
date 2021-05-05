@@ -1,5 +1,5 @@
 import { Checker, CheckError } from "akitainu";
-import { glob } from "glob";
+import glob from "glob";
 import path from "path";
 import ts from "typescript";
 import { promisify } from "util";

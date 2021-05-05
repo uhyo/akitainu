@@ -1,9 +1,14 @@
-import path from "path";
-import typescriptChecker from ".";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import typescriptChecker from "./index.js";
 
 describe("akitainu-checker-typescript", () => {
+  const projectDir = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "test-fixtures/project1"
+  );
   it("normal", async () => {
-    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
     const checker = typescriptChecker({
       tsconfig: path.join(projectDir, "tsconfig.json"),
     });
@@ -41,7 +46,6 @@ describe("akitainu-checker-typescript", () => {
     ]);
   });
   it("filtering by filenames", async () => {
-    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
     const checker = typescriptChecker({
       tsconfig: path.join(projectDir, "tsconfig.json"),
     });
@@ -62,7 +66,6 @@ describe("akitainu-checker-typescript", () => {
     ]);
   });
   it("filtering by filenames (multiple)", async () => {
-    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
     const checker = typescriptChecker({
       tsconfig: path.join(projectDir, "tsconfig.json"),
     });
@@ -83,7 +86,6 @@ describe("akitainu-checker-typescript", () => {
     ]);
   });
   it("filtering by absolute path", async () => {
-    const projectDir = path.resolve(__dirname, "..", "test-fixtures/project1");
     const checker = typescriptChecker({
       tsconfig: path.join(projectDir, "tsconfig.json"),
     });

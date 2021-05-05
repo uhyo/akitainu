@@ -1,6 +1,6 @@
 import { RuleError } from "akitainu";
 import path from "path";
-import { upsert } from "./util/upsert";
+import { upsert } from "./util/upsert.js";
 
 const emptyArr = () => [];
 

@@ -1,5 +1,5 @@
 import { File } from "parse-diff";
-import { RuleErrorWithLocation } from "./groupErrorsByFile";
+import { RuleErrorWithLocation } from "./groupErrorsByFile.js";
 
 /**
  * ReviewComment for GitHub API

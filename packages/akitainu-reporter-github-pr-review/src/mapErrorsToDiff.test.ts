@@ -1,5 +1,5 @@
 import parseDiff from "parse-diff";
-import { mapErrorsToDiff } from "./mapErrorsToDiff";
+import { mapErrorsToDiff } from "./mapErrorsToDiff.js";
 
 describe("mapErrorsToDiff", () => {
   it("1", () => {

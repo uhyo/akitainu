@@ -1,4 +1,4 @@
-import { groupErrorsByFile } from "./groupErrorsByFile";
+import { groupErrorsByFile } from "./groupErrorsByFile.js";
 
 describe("groupErrorsByFile", () => {
   it("errors are grouped by files", () => {

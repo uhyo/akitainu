@@ -1,5 +1,5 @@
 import { RuleError } from "akitainu";
-import { ErrorsForDiff } from "./mapErrorsToDiff";
+import { ErrorsForDiff } from "./mapErrorsToDiff.js";
 
 export function makeSummaryComment(
   errors: readonly RuleError[],
