@@ -1,6 +1,10 @@
+import { jest } from "@jest/globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import typescriptChecker from "./index.js";
+
+// TypeScript checker needs time, so increase timeout
+jest.setTimeout(150_000);
 
 describe("akitainu-checker-typescript", () => {
   const projectDir = path.resolve(
