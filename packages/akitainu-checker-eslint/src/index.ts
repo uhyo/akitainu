@@ -1,7 +1,13 @@
 import { Checker, CheckError } from "akitainu";
 import { ESLint } from "eslint";
 
-export default function eslintChecker(eslintOptions?: ESLint.Options): Checker {
+export type CheckerESLintOptions = {
+  eslintOptions?: ESLint.Options;
+};
+
+export default function eslintChecker({
+  eslintOptions,
+}: CheckerESLintOptions): Checker {
   const checker: Checker = {
     name: "eslint",
     async run({ targetFiles = [] }) {

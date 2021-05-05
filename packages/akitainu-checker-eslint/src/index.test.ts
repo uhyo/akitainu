@@ -4,7 +4,7 @@ import eslintChecker from "./index.js";
 
 describe("akitainu-checker-eslint", () => {
   it("glob", async () => {
-    const checker = eslintChecker();
+    const checker = eslintChecker({});
     const testFixturesDir = path.resolve(
       path.dirname(fileURLToPath(import.meta.url)),
       "../test-fixtures"
