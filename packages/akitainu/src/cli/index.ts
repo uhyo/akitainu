@@ -2,16 +2,16 @@
 
 import { cosmiconfig } from "cosmiconfig";
 import path from "path";
-import { Checker } from "../checker";
-import { runReporters, runRules } from "../core";
-import { Filter } from "../filter";
-import { noFilter } from "../filter/noFilter";
-import { Reporter } from "../reporter";
-import { Rule } from "../rule";
-import { Source } from "../source";
-import { nullSource } from "../source/nullSource";
-import { CliConfig, getDefaultConfig } from "./config";
-import { resolvePackage } from "./resolvePackage";
+import { Checker } from "../checker/index.js";
+import { runReporters, runRules } from "../core/index.js";
+import { Filter } from "../filter/index.js";
+import { noFilter } from "../filter/noFilter.js";
+import { Reporter } from "../reporter/index.js";
+import { Rule } from "../rule/index.js";
+import { Source } from "../source/index.js";
+import { nullSource } from "../source/nullSource.js";
+import { CliConfig, getDefaultConfig } from "./config.js";
+import { resolvePackage } from "./resolvePackage.js";
 
 main().catch((err) => {
   console.error(err);

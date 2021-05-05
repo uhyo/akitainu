@@ -1,20 +1,20 @@
-import { byCodeFilter } from "../filter/byCodeFilter";
-import { prettyConsoleReporter } from "../reporter/prettyConsoleReporter";
-import { gitDiffSource } from "../source/gitDiffSource";
-import { staticSource } from "../source/staticSource";
-import { PackageConfig } from "./config";
+import { byCodeFilter } from "../filter/byCodeFilter.js";
+import { prettyConsoleReporter } from "../reporter/prettyConsoleReporter.js";
+import { gitDiffSource } from "../source/gitDiffSource.js";
+import { staticSource } from "../source/staticSource.js";
+import { PackageConfig } from "./config.js";
 
 export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
   if (typeof pkg === "string") {
     const mod = await resolvePackageName(pkg);
-    return mod({});
+    return mod({} as never);
   }
   const [packageName, config] = pkg;
   const mod = await resolvePackageName(packageName);
-  return mod(config);
+  return mod(config as never);
 }
 
-const internalPackage = new Map<string, (config: any) => unknown>([
+const internalPackage = new Map<string, (config: never) => unknown>([
   ["static-source", staticSource],
   ["git-diff-source", gitDiffSource],
   ["pretty-console-reporter", prettyConsoleReporter],
@@ -23,7 +23,7 @@ const internalPackage = new Map<string, (config: any) => unknown>([
 
 async function resolvePackageName(
   name: string
-): Promise<(config: any) => unknown> {
+): Promise<(config: never) => unknown> {
   const internalPackagePrefix = "akitainu:";
   if (name.startsWith(internalPackagePrefix)) {
     // `akitainu:`-prefixed name is special, pointing to internal package

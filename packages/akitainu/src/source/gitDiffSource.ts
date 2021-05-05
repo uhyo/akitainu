@@ -1,7 +1,7 @@
-import path from "path";
-import { Source } from ".";
 import child_process from "child_process";
+import path from "path";
 import { promisify } from "util";
+import { Source } from "./index.js";
 
 const execFile = promisify(child_process.execFile);
 

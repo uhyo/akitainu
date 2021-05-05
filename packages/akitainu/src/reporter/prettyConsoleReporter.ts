@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Reporter } from ".";
+import { Reporter } from "./index.js";
 
 // empty for now
 export type PrettyConsoleReporterConfig = Record<string, never>;

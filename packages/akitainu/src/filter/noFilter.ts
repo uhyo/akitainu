@@ -1,4 +1,4 @@
-import { Filter } from ".";
+import { Filter } from "./index.js";
 
 export function noFilter(): Filter {
   return {

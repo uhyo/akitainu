@@ -1,6 +1,6 @@
-import { CheckError } from "../checker";
-import { Reporter } from "../reporter";
-import { Rule } from "../rule";
+import { CheckError } from "../checker/index.js";
+import { Reporter } from "../reporter/index.js";
+import { Rule } from "../rule/index.js";
 
 export type RunRuleOptionns = {
   baseDirectory: string;

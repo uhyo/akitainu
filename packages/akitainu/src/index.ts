@@ -3,11 +3,11 @@ export type {
   CheckerInput,
   CheckerResult,
   CheckError,
-} from "./checker";
-export type { RuleError } from "./core";
-export type { Filter, FilterInput, FilterResult } from "./filter";
-export type { Reporter, ReporterInput } from "./reporter";
-export type { Source, SourceResult } from "./source";
+} from "./checker/index.js";
+export type { RuleError } from "./core/index.js";
+export type { Filter, FilterInput, FilterResult } from "./filter/index.js";
+export type { Reporter, ReporterInput } from "./reporter/index.js";
+export type { Source, SourceResult } from "./source/index.js";
 
 /**
  * Run Akitainu.

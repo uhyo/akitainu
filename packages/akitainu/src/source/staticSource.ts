@@ -1,4 +1,4 @@
-import { Source } from ".";
+import { Source } from "./index.js";
 
 export type StaticSourceInput = {
   files: string[];

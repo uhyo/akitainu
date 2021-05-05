@@ -1,6 +1,6 @@
-import { Checker } from "../checker";
-import { Filter } from "../filter";
-import { Source } from "../source";
+import { Checker } from "../checker/index.js";
+import { Filter } from "../filter/index.js";
+import { Source } from "../source/index.js";
 
 export type Rule = {
   name?: string;
