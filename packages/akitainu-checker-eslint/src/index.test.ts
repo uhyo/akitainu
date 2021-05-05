@@ -1,10 +1,14 @@
 import path from "path";
-import eslintChecker from ".";
+import { fileURLToPath } from "url";
+import eslintChecker from "./index.js";
 
 describe("akitainu-checker-eslint", () => {
   it("glob", async () => {
     const checker = eslintChecker();
-    const testFixturesDir = path.resolve(__dirname, "../test-fixtures");
+    const testFixturesDir = path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../test-fixtures"
+    );
     const { errors } = await checker.run({
       targetFiles: ["./test-fixtures/*.js"],
       baseDirectory: "./",
