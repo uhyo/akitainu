@@ -1,6 +1,6 @@
 {
   "name": "akitainu-reporter-github-pr-review",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.6",
   "description": "GitHub PR reporter for Akitainu",
   "main": "dist/index.js",
   "type": "module",

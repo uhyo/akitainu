@@ -1,6 +1,6 @@
 {
   "name": "akitainu-checker-eslint",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.6",
   "description": "ESLint checker for Akitainu",
   "main": "dist/index.js",
   "type": "module",
