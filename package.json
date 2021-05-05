@@ -3,9 +3,11 @@
   "version": "0.1.0-alpha.2",
   "description": "Gradual code linting tool",
   "main": "index.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "watch:build": "concurrently \"npm run watch:build --workspace akitainu\" \"npm run watch:build --workspace akitainu-reporter-github-pr-review\"",
+    "lint": "akitainu",
     "test": "jest"
   },
   "keywords": [],
@@ -14,9 +16,13 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
+    "akitainu": "^0.1.0-alpha.4",
+    "akitainu-checker-eslint": "^0.1.0-alpha.0",
+    "akitainu-checker-typescript": "^0.1.0-alpha.5",
     "concurrently": "^6.0.1",
     "eslint": "^7.25.0",
     "eslint-plugin-import": "^2.22.1",
+    "prettier": "^2.2.1",
     "typescript": "^4.3.0-beta"
   },
   "workspaces": [
