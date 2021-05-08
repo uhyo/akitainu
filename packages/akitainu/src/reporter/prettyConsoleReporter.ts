@@ -10,6 +10,9 @@ export function prettyConsoleReporter(
   return {
     name: "pretty-console",
     async run({ errors }) {
+      console.log(
+        `Found ${errors.length || "no"} error${errors.length > 1 ? "s" : ""}.\n`
+      );
       for (const { checker, code, message, location } of errors) {
         const loc = !location
           ? ""
