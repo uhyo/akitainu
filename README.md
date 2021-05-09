@@ -14,6 +14,8 @@ akitainu is inspired by [reviewdog](https://github.com/reviewdog/reviewdog), but
 
 ## Usage
 
+See also: [Akitainu Website](https://akitainu.vercel.app/)
+
 Basically, you define **rules** which are composed of following configurations:
 
 - **source** defines which files to check.
