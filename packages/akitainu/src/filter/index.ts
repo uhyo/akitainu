@@ -1,4 +1,4 @@
-import { RuleError } from "../core/index.js";
+import { RuleError } from "../core/runRule.js";
 
 export type FilterInput = {
   readonly errors: RuleError[];

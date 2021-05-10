@@ -1,5 +1,5 @@
 import { Rule } from "../rule/index.js";
-import { runRule } from "./index.js";
+import { runRule } from "./runRule.js";
 
 describe("runRule", () => {
   it("source & checker", async () => {
