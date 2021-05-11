@@ -1,4 +1,4 @@
-export type CliConfig = {
+export type AkitainuConfig = {
   /**
    * Base directory of relative paths in the config.
    */
@@ -27,14 +27,14 @@ export type ConfigRule = {
    */
   checker: PackageConfig;
   /**
-   * Filter applied to errors.
+   * Filters applied to errors.
    */
-  filter?: PackageConfig;
+  filters?: PackageConfig[];
 };
 
 export type PackageConfig = string | [packageName: string, config: unknown];
 
-export function getDefaultConfig(defaultBaseDirectory: string): CliConfig {
+export function getDefaultConfig(defaultBaseDirectory: string): AkitainuConfig {
   return {
     baseDirectory: defaultBaseDirectory,
     rules: [],

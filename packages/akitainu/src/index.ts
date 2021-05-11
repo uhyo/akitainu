@@ -4,6 +4,7 @@ export type {
   CheckerResult,
   CheckError,
 } from "./checker/index.js";
+export type { AkitainuConfig } from "./core/config.js";
 export type { Filter, FilterInput, FilterResult } from "./filter/index.js";
 export type { Reporter, ReporterInput } from "./reporter/index.js";
 export type { Source, SourceResult } from "./source/index.js";

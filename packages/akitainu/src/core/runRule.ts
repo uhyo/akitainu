@@ -26,17 +26,19 @@ export async function runRule(
     targetFiles: sourceResult?.targetFiles,
     baseDirectory,
   });
-  const ruleErrors = result.errors.map((err) => ({
+  let ruleErrors = result.errors.map((err) => ({
     ...err,
     checker: rule.checker.name,
   }));
 
-  const filterResult = (await rule.filter?.run({
-    errors: ruleErrors,
-  })) ?? { errors: ruleErrors };
+  for (const filter of rule.filters ?? []) {
+    ({ errors: ruleErrors } = await filter.run({
+      errors: ruleErrors,
+    }));
+  }
 
   return {
-    errors: filterResult.errors,
+    errors: ruleErrors,
   };
 }
 

@@ -6,5 +6,5 @@ export type Rule = {
   name?: string;
   source?: Source;
   checker: Checker;
-  filter?: Filter;
+  filters?: Filter[];
 };

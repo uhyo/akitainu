@@ -1,10 +1,9 @@
 import { cosmiconfig } from "cosmiconfig";
 import path from "path";
 import { Checker } from "../checker/index.js";
-import { CliConfig, getDefaultConfig } from "../core/config.js";
+import { AkitainuConfig, getDefaultConfig } from "../core/config.js";
 import { resolvePackage } from "../core/resolvePackage.js";
 import { Filter } from "../filter/index.js";
-import { noFilter } from "../filter/noFilter.js";
 import { Reporter } from "../reporter/index.js";
 import { Rule } from "../rule/index.js";
 import { Source } from "../source/index.js";
@@ -31,7 +30,7 @@ export async function main(
   configFile: string | undefined
 ): Promise<AkitainuResult> {
   const { configDir, config: rawConfig } = await loadConfig(configFile);
-  const config: CliConfig = {
+  const config: AkitainuConfig = {
     ...getDefaultConfig(configDir),
     ...rawConfig,
   };
@@ -76,7 +75,7 @@ async function loadConfig(configFile: string | undefined) {
   };
 }
 
-function getRules(config: CliConfig): Promise<Rule[]> {
+function getRules(config: AkitainuConfig): Promise<Rule[]> {
   return Promise.all(
     config.rules.map(async (rule) => ({
       name: rule.name,
@@ -84,14 +83,14 @@ function getRules(config: CliConfig): Promise<Rule[]> {
         ? ((await resolvePackage(rule.source)) as Source)
         : nullSource(),
       checker: (await resolvePackage(rule.checker)) as Checker,
-      filter: rule.filter
-        ? ((await resolvePackage(rule.filter)) as Filter)
-        : noFilter(),
+      filters: await Promise.all(
+        rule.filters?.map((p) => resolvePackage(p) as Promise<Filter>) ?? []
+      ),
     }))
   );
 }
 
-function getReporters(config: CliConfig): Promise<Reporter[]> {
+function getReporters(config: AkitainuConfig): Promise<Reporter[]> {
   return Promise.all(
     config.reporters.map((rep) => resolvePackage(rep) as Promise<Reporter>)
   );
