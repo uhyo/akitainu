@@ -1,3 +1,8 @@
+import { Checker } from "../checker/index.js";
+import { Filter } from "../filter/index.js";
+import { Reporter } from "../reporter/index.js";
+import { Source } from "../source/index.js";
+
 export type AkitainuConfig = {
   /**
    * Base directory of relative paths in the config.
@@ -10,7 +15,7 @@ export type AkitainuConfig = {
   /**
    * Reporters definition.
    */
-  reporters: PackageConfig[];
+  reporters: (PackageConfig | Reporter)[];
 };
 
 export type ConfigRule = {
@@ -21,15 +26,15 @@ export type ConfigRule = {
   /**
    * Source of files to check.
    */
-  source?: PackageConfig;
+  source?: PackageConfig | Source;
   /**
    * Checker applied.
    */
-  checker: PackageConfig;
+  checker: PackageConfig | Checker;
   /**
    * Filters applied to errors.
    */
-  filters?: PackageConfig[];
+  filters?: (PackageConfig | Filter)[];
 };
 
 export type PackageConfig = string | [packageName: string, config: unknown];

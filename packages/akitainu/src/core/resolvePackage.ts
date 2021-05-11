@@ -4,14 +4,19 @@ import { gitDiffSource } from "../source/gitDiffSource.js";
 import { staticSource } from "../source/staticSource.js";
 import { PackageConfig } from "./config.js";
 
-export async function resolvePackage(pkg: PackageConfig): Promise<unknown> {
+export async function resolvePackage<T>(
+  pkg: PackageConfig | T
+): Promise<unknown> {
   if (typeof pkg === "string") {
     const mod = await resolvePackageName(pkg);
     return mod({} as never);
   }
-  const [packageName, config] = pkg;
-  const mod = await resolvePackageName(packageName);
-  return mod(config as never);
+  if (Array.isArray(pkg)) {
+    const [packageName, config] = pkg;
+    const mod = await resolvePackageName(packageName);
+    return mod(config as never);
+  }
+  return pkg;
 }
 
 const internalPackage = new Map<string, (config: never) => unknown>([
