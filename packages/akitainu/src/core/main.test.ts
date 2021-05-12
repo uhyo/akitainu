@@ -1,6 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import { main } from "./main";
+import { main } from "./main.js";
 
 describe("main", () => {
   it("load config", async () => {
